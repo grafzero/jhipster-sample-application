@@ -1,0 +1,66 @@
+entity Breed {
+	breedName String,
+    category String
+}
+
+entity Kennel {
+kennelName String,
+location Location
+}
+
+entity Litter {
+litterName String,
+kennel Kennel,
+breed Breed
+}
+
+
+
+relationship OneToMany {
+	Kennel{kennel} to Litter
+}
+
+relationship OneToMany {
+	Breed{breed} to Litter
+}
+
+entity Image {
+	imageUrl String,
+    imageCaption String
+}
+
+relationship ManyToOne{
+Image{images} to Litter
+Image{images} to Kennel
+Image{images} to Breed
+}
+
+relationship OneToOne{
+Location{location} to Kennel
+}
+
+
+// an ignored comment
+/** not an ignored comment */
+entity Location {
+	streetAddress String,
+	postalCode String,
+	city String
+}
+
+
+
+
+
+// Set pagination options
+paginate Litter, Kennel, Breed with infinite-scroll
+//paginate Job with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Employee, Job
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
